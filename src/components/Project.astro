@@ -1,0 +1,157 @@
+---
+import Container from "./Container.astro";
+import { Icon } from "astro-icon/components";
+
+interface Result {
+  title: string;
+  description: string;
+  image: string;
+  tags?: string[];
+  link?: string;
+  linkLabel?: string;
+}
+
+// Jumlah karya yang tampil di awal
+const INITIAL_COUNT = 3;
+
+const results: Result[] = [
+  {
+    title: "Promotional Flyer & Visual Design",
+    description:
+      "Flyers and promo visuals for social media, in-store TV, and sales campaigns.",
+    image: "public/images/experience/result1.jpg",
+    tags: ["Graphic Design", "Corel Draw"],
+    link: "https://drive.google.com/drive/folders/136L9knzXs_ylkJExfv76N9QA-h1y27DE?usp=drive_link",
+    linkLabel: "View project",
+  },
+  {
+    title: "Editing Photo & Color Grading",
+    description:
+      "Portrait retouching and color grading with Lightroom and LUTs for natural, consistent tones.",
+    image: "public/images/experience/result5.jpg",
+    tags: ["Editing Photo", "Adobe Lightroom", "Lut'S"],
+    link: "https://drive.google.com/drive/folders/1wH7CzqRXINr-zQxmyMpuAjWtMm3GkSMK?usp=sharing",
+    linkLabel: "View project",
+  },
+  {
+    title: "Landing Page & Website Portfolio",
+    description:
+      "Personal portfolio website built with Astro and Tailwind CSS.",
+    image: "public/images/experience/result8.png",
+    tags: ["Astro", "Tailwind CSS"],
+    link: "https://contoh.com/ok-properti",
+    linkLabel: "View project",
+  },
+  //tampilan dibawah yang tidak muncul di website
+  {
+    title: "Mockup & Prototype Design",
+    description:
+      "Keychain merchandise mockup in Photoshop to preview the product before printing.",
+    image: "public/images/experience/result4.jpg",
+    tags: ["Mockup", "Adobe Photoshop"],
+    link: "https://drive.google.com/drive/folders/13ItbN2knoqy5s-8360WUDpz-pW-1ZL6G?usp=drive_link",
+    linkLabel: "View project",
+  },
+  {
+    title: "Create Logo & Branding",
+    description:
+      "Logo and visual identity for Kedai 154 in light and dark versions.",
+    image: "public/images/experience/result7.jpg",
+    tags: ["Logo Design", "Adobe Photoshop", "Adobe Illustrator"],
+    link: "https://drive.google.com/drive/folders/1ganhmLGIAj1thiVxGyQm95GVVk-aX5MQ?usp=sharing",
+    linkLabel: "View project",
+  },
+  {
+    title: "Poster & Banner Design",
+    description:
+      "Sports-themed poster and banner with bold photography and typography.",
+    image: "public/images/experience/result3.jpg",
+    tags: ["Poster Design", "Adobe Photoshop", "Canva"],
+    link: "https://drive.google.com/drive/folders/1-I0Wg5Ijml4VTI-oMvChJPwGvnuDIDZ4?usp=drive_link",
+    linkLabel: "View project",
+  },
+];
+---
+
+<div id="project">
+  <Container>
+    <div class="reveal mb-12 space-y-2 text-center">
+      <h1 class="text-2xl font-semibold text-primary">Featured Project</h1>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Some Of My Recent Project</h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {results.map((item, index) => (
+        <div
+          class:list={[
+            "reveal flex flex-col rounded-3xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800",
+            index >= INITIAL_COUNT && "extra-result hidden",
+          ]}
+        >
+          <div class="overflow-hidden rounded-2xl">
+            <img
+              src={item.image}
+              alt={item.title}
+              loading="lazy"
+              class="aspect-[6/5] w-full object-cover transition duration-300 hover:scale-105"
+            />
+          </div>
+
+          {item.tags && (
+            <div class="mt-5 flex flex-wrap gap-2">
+              {item.tags.map((tag) => (
+                <span class="rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <h3 class="mt-4 text-2xl font-semibold text-gray-900 dark:text-white">{item.title}</h3>
+          <p class="mt-4 text-gray-600 dark:text-gray-300">{item.description}</p>
+
+          {item.link && (
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener"
+              class="mt-auto inline-flex items-center gap-1 pt-6 text-primary hover:underline"
+            >
+              {item.linkLabel ?? "View work"}
+              <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
+            </a>
+          )}
+        </div>
+      ))}
+    </div>
+
+    {results.length > INITIAL_COUNT && (
+      <div class="mt-10 text-center">
+        <button
+          id="toggle-results"
+          type="button"
+          aria-expanded="false"
+          class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-6 py-3 font-medium text-gray-900 shadow-sm transition hover:border-primary hover:text-primary dark:border-gray-700 dark:bg-gray-800 dark:text-white"
+        >
+          <span id="toggle-label">See more</span>
+          <Icon id="toggle-icon" name="lucide:chevron-down" class="h-4 w-4 transition-transform" />
+        </button>
+      </div>
+    )}
+  </Container>
+</div>
+
+<script>
+  const btn = document.getElementById("toggle-results");
+  const label = document.getElementById("toggle-label");
+  const icon = document.getElementById("toggle-icon");
+  const extras = document.querySelectorAll(".extra-result");
+
+  btn?.addEventListener("click", () => {
+    const opening = btn.getAttribute("aria-expanded") === "false";
+    extras.forEach((el) => el.classList.toggle("hidden", !opening));
+    btn.setAttribute("aria-expanded", String(opening));
+    if (label) label.textContent = opening ? "See less" : "See more";
+    icon?.classList.toggle("rotate-180", opening);
+  });
+</script> 

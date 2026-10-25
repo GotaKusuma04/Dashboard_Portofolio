@@ -1,0 +1,56 @@
+---
+import Container from "./Container.astro";
+import { Icon } from "astro-icon/components";
+
+interface Skill {
+  name: string;
+  percentage: number;
+  icon: string;
+  color: string;
+}
+
+const skills: Skill[] = [
+  { name: "HTML", percentage: 85, icon: "simple-icons:html5", color: "bg-orange-500" },
+  { name: "CSS", percentage: 80, icon: "simple-icons:css3", color: "bg-blue-500" },
+  { name: "JavaScript", percentage: 70, icon: "simple-icons:javascript", color: "bg-yellow-400" },
+  { name: "Tailwind CSS", percentage: 80, icon: "simple-icons:tailwindcss", color: "bg-cyan-400" },
+  { name: "Adobe Premiere Pro", percentage: 85, icon: "simple-icons:adobepremierepro", color: "bg-violet-900" },
+  { name: "Adobe Lightroom", percentage: 85, icon: "simple-icons:adobelightroom", color: "bg-sky-500" },
+  { name: "Adobe Photoshop", percentage: 85, icon: "simple-icons:adobephotoshop", color: "bg-blue-800" },
+  { name: "Figma", percentage: 75, icon: "simple-icons:figma", color: "bg-rose-600" },
+  { name: "Corel Draw", percentage: 70, icon: "simple-icons:coreldraw", color: "bg-lime-600" },
+  { name: "Cisco Packet Tracer", percentage: 50, icon: "simple-icons:cisco", color: "bg-neutral-400" },
+  { name: "Microsoft Office 365", percentage: 80, icon: "simple-icons:microsoftoffice", color: "bg-orange-600" },
+];
+---
+
+<div id="skills">
+  <Container>
+    <div class="reveal mb-12 space-y-2 text-center">
+      <h1 class="text-2xl font-semibold text-primary">My Skills</h1>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Technical Skills & Tools</h2>
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      {skills.map((skill, index) => (
+        <div class="reveal rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-gray-700 dark:bg-gray-800" style={`--delay: ${index * 100}ms`}>
+          <div class="mb-4 flex items-center gap-4">
+            <div class={`flex h-12 w-12 items-center justify-center rounded-xl text-white shadow-lg ${skill.color}`}>
+              <Icon name={skill.icon} class="h-6 w-6" />
+            </div>
+            <div class="flex-1">
+              <div class="flex items-center justify-between gap-3">
+                <span class="font-semibold text-gray-900 dark:text-white">{skill.name}</span>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{skill.percentage}%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="h-2.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+            <div class={`skill-bar h-full rounded-full ${skill.color}`} style={`--w: ${skill.percentage}%`}></div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </Container>
+</div>

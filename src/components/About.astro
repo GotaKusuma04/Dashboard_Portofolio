@@ -1,0 +1,23 @@
+---
+import Container from "./Container.astro"
+
+---
+
+<div id="about">
+  <Container>
+    <h2 class="mb-4 my-8 text-2xl font-bold uppercase text-gray-700 dark:text-white md:text-4xl">
+      About Me
+    </h2>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-8 items-center">  
+      <div class="reveal lg:col-span-2 md:col-span-2" style="--delay:150ms">
+        <p class="text-gray-600 dark:text-gray-300 text-justify text-base leading-relaxed">
+          Computer Science graduate with hands-on experience as a Managed Service Engineer, supporting the migration of more than 3,200 laptops and PCs to a new company domain. Experienced in checking device readiness, troubleshooting login and user profile issues, and providing technical support to ensure a smooth transition with minimal disruption to users.
+          I also have experience in IT support, UI/UX design, front-end development, application maintenance, graphic design, and marketing. I enjoy learning new things, solving technical problems, working with others, and helping users find practical solutions. I am adaptable, collaborative, and committed to providing reliable and user-friendly support.
+        </p>
+      </div>
+      <div class="reveal flex justify-center lg:justify-end" style="--delay:150ms">
+        <img src="/public/gotama.jpg" class="rounded-full aspect-square w-64 max-w-xs lg:max-w-sm object-cover shadow-lg" alt="profile photo" />
+      </div>
+    </div>
+  </Container>
+</div>

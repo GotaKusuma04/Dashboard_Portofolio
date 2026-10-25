@@ -1,0 +1,107 @@
+---
+import { AstroFont } from "astro-font";
+import AppFooter from "../components/AppFooter.astro";
+import AppHeader from "../components/AppHeader.astro";
+import "./../tailus.css";
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <meta name="generator" content={Astro.generator} />
+
+    <meta
+      name="description"
+      content="Template built with tailwindcss using Tailus blocks v2"
+    />
+
+    <title>Tailus astro theme</title>
+
+    <!--
+      Jalankan sebelum browser melakukan paint pertama.
+      Ini mencegah flash dari light -> dark atau dark -> light.
+    -->
+    <script is:inline>
+      (() => {
+        try {
+          const savedTheme = localStorage.getItem("theme");
+
+          const systemDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+
+          const isDark = savedTheme
+            ? savedTheme === "dark"
+            : systemDark;
+
+          document.documentElement.classList.toggle("dark", isDark);
+
+          document.documentElement.style.colorScheme = isDark
+            ? "dark"
+            : "light";
+        } catch {
+          // Jika localStorage tidak tersedia, gunakan preferensi sistem.
+          const systemDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+
+          document.documentElement.classList.toggle("dark", systemDark);
+
+          document.documentElement.style.colorScheme = systemDark
+            ? "dark"
+            : "light";
+        }
+      })();
+    </script>
+
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <AstroFont
+      config={[
+        {
+          src: [],
+          name: "Urbanist",
+          preload: true,
+          display: "swap",
+          selector: "html",
+          fallback: "sans-serif",
+          googleFontsURL:
+            "https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap",
+        },
+      ]}
+    />
+  </head>
+
+  <body class="bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100">
+    <AppHeader />
+
+    <slot />
+
+    <AppFooter />
+
+    <!-- Scroll reveal -->
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.15 },
+      );
+
+      document
+        .querySelectorAll(".reveal")
+        .forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

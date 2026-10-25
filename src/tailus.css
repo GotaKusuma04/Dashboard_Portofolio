@@ -1,0 +1,117 @@
+  @import 'tailwindcss';
+  @custom-variant dark (&:where(.dark, .dark *));
+
+  @theme {
+      --color-primary : var(--color-indigo-600);
+      --color-secondary : var(--color-orange-600);
+      --color-info : var(--color-blue-600);
+  }
+
+  [id] {
+    scroll-margin-top: 5rem;
+  }
+
+
+  /* Scroll reveal (hanya aktif kalau JavaScript jalan) */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease-in-out;
+    transition-delay: var(--delay, 0ms);
+  }
+  .js .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Progress bar skill terisi dari 0 */
+  .skill-bar {
+    width: var(--w);
+  }
+  .js .skill-bar {
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+  }
+  .js .is-visible .skill-bar {
+    width: var(--w);
+  }
+
+  /* Animasi masuk untuk hero saat halaman dibuka */
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: none; }
+  }
+  .fade-up {
+    animation: fade-up 0.8s ease both;
+    animation-delay: var(--delay, 0ms);
+  }
+
+  /* Hormati pengguna yang mematikan animasi di perangkatnya */
+  @media (prefers-reduced-motion: reduce) {
+    .js .reveal, .js .skill-bar, .fade-up {
+      opacity: 1;
+      transform: none;
+      transition: none;
+      animation: none;
+    }
+    .js .skill-bar { width: var(--w); }
+  }
+
+
+  /* Animasi pop-up kontak */
+  #contact-dialog {
+    opacity: 0;
+    transform: translateY(24px) scale(0.96);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+
+  #contact-dialog[open] {
+    opacity: 1;
+    transform: none;
+  }
+
+  #contact-dialog::backdrop {
+    background: rgb(0 0 0 / 0);
+    backdrop-filter: blur(0);
+    transition:
+      background 0.3s ease,
+      backdrop-filter 0.3s ease,
+      overlay 0.3s allow-discrete,
+      display 0.3s allow-discrete;
+  }
+
+  #contact-dialog[open]::backdrop {
+    background: rgb(0 0 0 / 0.6);
+    backdrop-filter: blur(4px);
+  }
+
+  /* Titik awal saat dialog baru dibuka */
+  @starting-style {
+    #contact-dialog[open] {
+      opacity: 0;
+      transform: translateY(24px) scale(0.96);
+    }
+    #contact-dialog[open]::backdrop {
+      background: rgb(0 0 0 / 0);
+      backdrop-filter: blur(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #contact-dialog,
+    #contact-dialog::backdrop {
+      transition: none;
+    }
+  }
+
+  #contact-dialog[open] form > * {
+    animation: fade-up 0.5s ease both;
+  }
+  #contact-dialog[open] form > *:nth-child(1) { animation-delay: 80ms; }
+  #contact-dialog[open] form > *:nth-child(2) { animation-delay: 140ms; }
+  #contact-dialog[open] form > *:nth-child(3) { animation-delay: 200ms; }
+  #contact-dialog[open] form > *:nth-child(4) { animation-delay: 260ms; }

@@ -1,0 +1,152 @@
+---
+import Container from "./Container.astro";
+import { Icon } from "astro-icon/components";
+
+interface Photo {
+  src: string;
+  alt: string;
+}
+
+interface Experience {
+  role: string;
+  company: string;
+  location: string;
+  period: string;
+  icon: string;
+  points: string[];
+  photos?: Photo[];
+}
+
+const experiences: Experience[] = [
+  {
+    role: "Managed Service Engineer (Contract)",
+    company: "PT NTT Technology Indonesia",
+    location: "Sorowako, South Sulawesi",
+    period: "Mar 2026 - Aug 2026",
+    icon: "lucide:server",
+    points: [
+      "Migrated over 3,200 laptops and PCs to a new corporate domain during a 6-month onsite engagement at PT Vale Indonesia.",
+      "Executed endpoint re-binding, account mapping, and image deployment on schedule for the full rollout.",
+      "Resolved authentication, access, and profile issues for affected users shortly after each rollout wave, cutting post-migration disruption.",
+      "Partnered with 3+ cross-functional teams to track migration status daily and close out user-reported issues within the project timeline.",
+    ],
+    photos: [
+      { src: "public/images/experience/NTT.jpeg", alt: "Domain migration at PT Vale Indonesia" }
+    ],
+  },
+  {
+    role: "Agency Relations Intern (ARE Mobil)",
+    company: "PT BFI Finance Indonesia Tbk",
+    location: "Buleleng, Bali",
+    period: "Jul 2025 - Sep 2025",
+    icon: "lucide:handshake",
+    points: [
+      "Recruited and onboarded new business agents across banking networks and vehicle dealers to expand the customer acquisition pipeline.",
+      "Built and sustained an active partner network that moved the branch closer to its debtor sales targets.",
+    ],
+    photos: [
+      { src: "public/images/experience/BFI.jpg", alt: "Internship at BFI Finance" },
+    ],
+  },
+  {
+    role: "Marketing & Graphic Design Intern",
+    company: "Badilan Grosir",
+    location: "Bali, Indonesia",
+    period: "Sep 2024 - Dec 2024",
+    icon: "lucide:palette",
+    points: [
+      "Created flyers and promotional visuals for 4+ channels: social media, in-store TV, events, and sales campaigns.",
+      "Adapted each design to its digital or print format.",
+    ],
+  },
+  {
+    role: "UI/UX Designer, Front-End Engineer & IT Support Intern",
+    company: "CV Avatar Solution",
+    location: "Bali, Indonesia",
+    period: "Jul 2022 - Sep 2022",
+    icon: "lucide:code-xml",
+    points: [
+      "Designed the interface and built a web-based landing page for the OK Properti application, from concept through front-end implementation.",
+      "Streamlined maintenance of a tourism ticketing system at Uluwatu Temple through regular observation and upkeep.",
+    ],
+    photos: [
+      { src: "public/images/experience/Avatar.jpeg", alt: "OK Properti landing page" },
+    ],
+  },
+];
+---
+
+<div id="experience">
+  <Container>
+    <div class="reveal mb-12 space-y-2 text-center">
+      <h1 class="text-2xl font-semibold text-primary">My Career</h1>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white">Work Experience</h2>
+    </div>
+
+    <div class="relative w-full">
+      <!-- garis timeline -->
+      <div class="absolute bottom-2 left-5 top-2 w-px bg-gray-200 dark:bg-gray-700"></div>
+
+      <div class="space-y-8">
+        {experiences.map((exp) => (
+          <div class="relative pl-16">
+            <!-- ikon di garis timeline -->
+            <div class="absolute left-0 top-1 flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-primary shadow-sm dark:border-gray-700 dark:bg-gray-800">
+              <Icon name={exp.icon} class="h-5 w-5" />
+            </div>
+            
+
+            <div class="reveal relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 lg:grid lg:grid-cols-5 lg:gap-8">
+              <!-- Kolom teks -->
+              <div class:list={["lg:col-span-3", !exp.photos?.length && "lg:col-span-5"]}>
+                <div class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{exp.role}</h3>
+                    <p class="text-sm font-medium text-primary">{exp.company}</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">{exp.location}</p>
+                  </div>
+                  <span class="w-fit shrink-0 rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                    {exp.period}
+                  </span>
+                </div>
+
+                <ul class="space-y-2 text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+                  {exp.points.map((point) => (
+                    <li class="flex gap-3">
+                      <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-primary"></span>
+                      <span>{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Kolom foto dokumentasi -->
+              {exp.photos && exp.photos.length > 0 && (
+                <div class="mt-6 grid grid-cols-1 gap-2 lg:col-span-2 lg:mt-0 lg:content-stretch">
+                  {exp.photos.map((photo, i) => (
+                    <a
+                      href={photo.src}
+                      target="_blank"
+                      rel="noopener"
+                      class:list={[
+                        "group block overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700",
+                        (exp.photos!.length === 1 || (exp.photos!.length % 2 === 1 && i === 0)) && "col-span-2",
+                      ]}
+                    >
+                      <img
+                        src={photo.src}
+                        alt={photo.alt}
+                        loading="lazy"
+                        class="aspect-video h-full w-full object-cover transition duration-300 group-hover:scale-105"
+                      />
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </Container>
+</div>

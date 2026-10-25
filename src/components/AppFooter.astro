@@ -1,0 +1,284 @@
+---
+import Container from "./Container.astro";
+import { Icon } from "astro-icon/components";
+
+const WEB3FORMS_KEY = "PASTE_ACCESS_KEY_KAMU_DI_SINI";
+
+const email = "gotamakusuma@gmail.com";
+const phone = "+62 853-4610-0532";
+const whatsapp = "https://wa.me/6285346100532";
+
+const socials = [
+  {
+    name: "GitHub",
+    icon: "simple-icons:github",
+    href: "https://github.com/GotaKusuma04",
+  },
+  {
+    name: "LinkedIn",
+    icon: "simple-icons:linkedin",
+    href: "https://www.linkedin.com/in/nyoman-gotama-bagus-kusuma-126116291",
+  },
+  {
+    name: "Instagram",
+    icon: "simple-icons:instagram",
+    href: "https://www.instagram.com/nyoman_gotama/",
+  },
+];
+
+const posts = [
+  {
+    title: "Pengalaman Migrasi 3.200 Laptop ke Domain Baru",
+    date: "Oct 2026",
+    href: "/blog/migrasi-domain",
+  },
+  {
+    title: "Dari Desain Grafis ke IT Support: Perjalanan Saya",
+    date: "Sep 2026",
+    href: "/blog/desain-ke-it",
+  },
+];
+
+const year = new Date().getFullYear();
+---
+
+<footer
+  id="contact"
+  class="border-t border-gray-200 pb-8 pt-16 dark:border-gray-800">
+  <Container>
+    <div class="grid gap-8 lg:grid-cols-3 lg:gap-12">
+      <!-- Kolom 1: ajakan kerja sama -->
+      <div class="space-y-5">
+        <p class="text-xs font-semibold uppercase tracking-widest text-primary">
+          Let's work together
+        </p>
+        <h2 class="text-3xl font-bold text-gray-900 dark:text-white">
+          Have a project in mind?
+        </h2>
+        <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+          Saya terbuka untuk peluang kerja, proyek IT, maupun desain. Ayo
+          ngobrol dan buat sesuatu yang bagus bersama.
+        </p>
+        <div class="flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            data-open-contact
+            class="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-medium text-white transition hover:opacity-90">
+            Get In Touch
+            <Icon name="lucide:arrow-up-right" class="h-4 w-4" />
+          </button>
+          <a
+            href={whatsapp}
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 rounded-full border border-gray-200 px-5 py-2.5 text-sm font-medium text-gray-900 transition hover:border-primary hover:text-primary dark:border-gray-700 dark:text-white">
+            <Icon name="logos:whatsapp-icon" class="h-4 w-4" />
+            WhatsApp
+          </a>
+        </div>
+      </div>
+
+      <!-- Kolom 2: kartu blog -->
+      <div
+        class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800">
+        <div class="mb-4 flex items-center justify-between">
+          <p
+            class="text-xs font-semibold uppercase tracking-widest text-primary">
+            Latest from my blog
+          </p>
+          <Icon name="lucide:pen-line" class="h-5 w-5 text-primary" />
+        </div>
+
+        <ul class="divide-y divide-gray-200 dark:divide-gray-700">
+          {
+            posts.map((post) => (
+              <li>
+                <a href={post.href} class="group block py-3">
+                  <p class="font-medium text-gray-900 transition group-hover:text-primary dark:text-white">
+                    {post.title}
+                  </p>
+                  <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                    {post.date}
+                  </p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+
+        <a
+          href="/blog"
+          class="mt-3 inline-flex items-center gap-1 text-sm text-primary hover:underline">
+          See all posts
+          <Icon name="lucide:arrow-right" class="h-4 w-4" />
+        </a>
+      </div>
+
+      <!-- Kolom 3: sosial media & kontak -->
+      <div class="space-y-5">
+        <p class="text-xs font-semibold uppercase tracking-widest text-primary">
+          Follow me
+        </p>
+
+        <div class="flex items-center gap-4">
+          {
+            socials.map((s) => (
+              <a
+                href={s.href}
+                target="_blank"
+                rel="noopener"
+                aria-label={s.name}
+                class="text-gray-500 transition hover:text-primary dark:text-gray-400">
+                <Icon name={s.icon} class="h-6 w-6" />
+              </a>
+            ))
+          }
+        </div>
+
+        <ul class="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+          <li>
+            <a
+              href={`mailto:${email}`}
+              class="inline-flex items-center gap-3 transition hover:text-primary">
+              <Icon name="lucide:mail" class="h-4 w-4 text-primary" />
+              {email}
+            </a>
+          </li>
+          <li>
+            <a
+              href={whatsapp}
+              class="inline-flex items-center gap-3 transition hover:text-primary">
+              <Icon name="lucide:phone" class="h-4 w-4 text-primary" />
+              {phone}
+            </a>
+          </li>
+          <li class="inline-flex items-center gap-3">
+            <Icon name="lucide:map-pin" class="h-4 w-4 text-primary" />
+            South Sulawesi, Indonesia
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bagian bawah -->
+    <div
+      class="mt-12 flex flex-col items-center justify-between gap-2 border-t border-gray-200 pt-6 text-xs text-gray-500 dark:border-gray-800 dark:text-gray-400 sm:flex-row">
+      <p>© {year} Nyoman Gotama Bagus Kusuma. All rights reserved.</p>
+      <p>Built with Astro & Tailwind CSS</p>
+    </div>
+  </Container>
+</footer>
+
+<dialog
+  id="contact-dialog"
+  class="m-auto w-[calc(100%-2rem)] max-w-lg rounded-3xl border border-gray-200 bg-white p-0 shadow-2xl dark:border-gray-700 dark:bg-gray-800"
+>
+  <form id="contact-form" class="space-y-5 p-6 sm:p-8" data-key={WEB3FORMS_KEY}>
+    <div class="flex items-start justify-between gap-4">
+      <div>
+        <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Send me a message</h3>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">Pesanmu akan langsung masuk ke email saya.</p>
+      </div>
+      <button type="button" id="contact-close" aria-label="Close" class="rounded-full p-2 text-gray-500 transition hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-700">
+        <Icon name="lucide:x" class="h-5 w-5" />
+      </button>
+    </div>
+
+    <div>
+      <label for="c-name" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-200">Nama</label>
+      <input id="c-name" name="name" type="text" required maxlength="80"
+        class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-gray-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-gray-600 dark:bg-gray-900 dark:text-white" />
+    </div>
+
+    <div>
+      <label for="c-email" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-200">Email kamu</label>
+      <input id="c-email" name="email" type="email" required maxlength="120"
+        class="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-gray-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-gray-600 dark:bg-gray-900 dark:text-white" />
+    </div>
+
+    <div>
+      <label for="c-message" class="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-200">Pesan</label>
+      <textarea id="c-message" name="message" rows="4" required maxlength="1500"
+        class="w-full resize-none rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-gray-900 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30 dark:border-gray-600 dark:bg-gray-900 dark:text-white"></textarea>
+    </div>
+
+    <!-- Honeypot anti-spam: harus kosong -->
+    <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+    <p id="contact-status" role="status" class="hidden rounded-xl px-4 py-2.5 text-sm"></p>
+
+    <button id="contact-submit" type="submit"
+      class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-5 py-3 font-medium text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
+      <span id="contact-submit-label">Kirim pesan</span>
+      <Icon name="lucide:send" class="h-4 w-4" />
+    </button>
+  </form>
+</dialog>
+
+<script>
+  const dialog = document.getElementById("contact-dialog") as HTMLDialogElement;
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const statusEl = document.getElementById("contact-status") as HTMLElement;
+  const submitBtn = document.getElementById("contact-submit") as HTMLButtonElement;
+  const submitLabel = document.getElementById("contact-submit-label") as HTMLElement;
+
+  const showStatus = (text: string, ok: boolean) => {
+    statusEl.textContent = text;
+    statusEl.className =
+      "rounded-xl px-4 py-2.5 text-sm " +
+      (ok
+        ? "bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-300"
+        : "bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-300");
+  };
+
+  document.querySelectorAll("[data-open-contact]").forEach((btn) =>
+    btn.addEventListener("click", () => {
+      statusEl.className = "hidden";
+      dialog.showModal();
+    })
+  );
+
+  document.getElementById("contact-close")?.addEventListener("click", () => dialog.close());
+
+  // Klik area gelap di luar kotak = tutup
+  dialog.addEventListener("click", (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    if (data.get("botcheck")) return;
+
+    submitBtn.disabled = true;
+    submitLabel.textContent = "Mengirim...";
+
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: form.dataset.key,
+          subject: "Pesan baru dari portofolio",
+          from_name: "Portfolio Gotama",
+          name: data.get("name"),
+          email: data.get("email"),
+          message: data.get("message"),
+        }),
+      });
+      const json = await res.json();
+      if (json.success) {
+        showStatus("Terima kasih! Pesanmu sudah terkirim.", true);
+        form.reset();
+        setTimeout(() => dialog.close(), 2000);
+      } else {
+        showStatus("Gagal mengirim. Coba lagi sebentar lagi.", false);
+      }
+    } catch {
+      showStatus("Koneksi bermasalah. Coba lagi atau hubungi lewat WhatsApp.", false);
+    } finally {
+      submitBtn.disabled = false;
+      submitLabel.textContent = "Kirim pesan";
+    }
+  });
+</script>

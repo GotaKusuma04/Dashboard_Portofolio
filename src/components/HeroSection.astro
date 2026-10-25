@@ -1,0 +1,65 @@
+---
+import Container from "./Container.astro";
+---
+
+<div class="relative" id="home">
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-40 dark:opacity-50">
+    <div
+      class="blur-[106px] h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700">
+    </div>
+    <div
+      class="blur-[106px] h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600">
+    </div>
+  </div>
+  <Container>
+    <div class="relative pt-36 ml-auto">
+      <div class="lg:w-2/3 text-center mx-auto">
+        <h1
+          class="fade-up text-gray-900 text-balance dark:text-white font-medium text-lg md:text-2xl xl:text-2xl">
+          Hi ! Im <span class="text-primary dark:text-white font-extrabold"
+            >Gotama 👋
+          </span>
+          <span class="block text-2xl md:text-3xl lg:text-4xl"
+            >Welcome To My</span>
+        </h1>
+
+        <!-- Mode terang: tulisan gelap -->
+        <img
+          src="/public/hero_light.png"
+          class="mx-auto mt-8 w-full max-w-[45rem] rounded-3xl object-cover shadow-lg dark:hidden"
+          alt="Gotama portfolio"
+        />
+        <!-- Mode gelap: tulisan putih -->
+        <img
+          src="/public/hero_dark.png"
+          class="mx-auto mt-8 hidden w-full max-w-[45rem] rounded-3xl object-cover shadow-lg dark:block"
+          alt="Gotama portfolio"
+        />
+
+        <div
+          class="relative mt-4 flex flex-wrap justify-center gap-y-4 gap-x-6">
+          <a
+            href="#about"
+            class="fade-up relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:bg-primary before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 sm:w-max">
+            <span class="relative text-base font-semibold text-white"
+              >Get started</span
+            >
+          </a>
+          <a
+            href="#contact"
+            class="fade-up relative flex h-11 w-full items-center justify-center px-6 before:absolute before:inset-0 before:rounded-full before:border before:border-transparent before:bg-primary/10 before:bg-gradient-to-b before:transition before:duration-300 hover:before:scale-105 active:duration-75 active:before:scale-95 dark:before:border-gray-700 dark:before:bg-gray-800 sm:w-max">
+            <span
+              class="relative text-base font-semibold text-primary dark:text-white"
+              >Learn more</span
+            >
+          </a>
+        </div>
+        <div
+          class="mt-16 border-y border-gray-100 dark:border-gray-800 sm:flex justify-between">
+        </div>
+      </div>
+    </div>
+  </Container>
+</div>
